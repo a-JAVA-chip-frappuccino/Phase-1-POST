@@ -53,6 +53,12 @@
       "name": "Christopher Robin",
       "image": "https://upload.wikimedia.org/wikipedia/en/e/e1/Christopherrobin.jpg",
       "age": 9
+    },
+    {
+      "name": "Fishie Oil",
+      "image": "https://naturesbounty.com/cdn/shop/products/087800.png?v=1667506722",
+      "age": 11,
+      "id": 10
     }
   ]
 }

@@ -1,5 +1,19 @@
+/* ----------------------------------------------------- 
+    VOCABULARY TERMS
+----------------------------------------------------- */
+
+/*
+
+    - POST request: a `fetch` call to add data
+
+*/
+
+const url = "http://localhost:3000/characters" // as the URL is used twice, it can be stored as a variable
+
 // fetches information from API endpoint and processes it into usable code
-// TODO: write GET request here
+fetch(url)
+    .then((resp) => resp.json())
+    .then((data) => renderCharacters(data))
 
 function renderCharacters(charArr) {
     // console.log(charArr)
@@ -31,4 +45,37 @@ function renderCharacters(charArr) {
         ul.append(li)
 
     })
+}
+
+/* ----------------------------------------------------- 
+    POST REQUEST
+----------------------------------------------------- */
+
+const form = document.querySelector('form')
+
+form.addEventListener('submit', (e) => handleAddNewChar(e))
+
+function handleAddNewChar(e) {
+    e.preventDefault()
+
+    // creates object to be POSTed to db.json
+    let newCharObj = {
+       name : e.target.name.value,
+       image : e.target['image url'].value,
+       age : parseInt(e.target.age.value)
+    }
+
+    // console.log(newCharObj)
+
+    // performs POST request
+    fetch(url, {
+        method : 'POST',
+        headers : {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify(newCharObj) // sends object to be POSTed
+    })
+        .then((resp) => resp.json())
+        .then((data) => renderCharacters([data])) // renders new object (within array) to screen
 }
